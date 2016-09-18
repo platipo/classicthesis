@@ -186,7 +186,7 @@
 \definecolor{Maroon}{cmyk}{0, 0.87, 0.68, 0.32}
 \definecolor{RoyalBlue}{cmyk}{1, 0.50, 0, 0}
 \definecolor{Black}{cmyk}{0, 0, 0, 0}
- ********************************************************************
+% ********************************************************************
 % Font Stuff
 % ********************************************************************
 % specialists: MinionPro
@@ -421,11 +421,11 @@
     \newlength{\newnumberwidth}
     \settowidth{\newnumberwidth}{999} % yields overfull hbox warnings for pages > 999
     \cftsetpnumwidth{\newnumberwidth}
-    
+
     % have the bib neatly positioned after the rest
     \newlength{\beforebibskip}
     \setlength{\beforebibskip}{0em}
-    
+
     % space for more than nine chapters
     \newlength{\newchnumberwidth}
     \settowidth{\newchnumberwidth}{.} % <--- tweak here if more space required
@@ -438,7 +438,7 @@
         \addtolength{\cftsubsecindent}{2\newchnumberwidth}
         \addtolength{\cftsubsubsecnumwidth}{\newchnumberwidth}
     }{\relax}%
-    
+
     % pagenumbers right after the titles
     % parts
     \ifthenelse{\boolean{@parts}}%
@@ -559,7 +559,7 @@
             \let\l@lstlisting\l@listings%
             \let\lstlistoflistings\listoflistings%
         }{\relax}%
-    
+
     % dirty work-around to get the spacing after the toc/lot/lof-titles right
         \ifthenelse{\boolean{@parts}}%
             {%
@@ -569,7 +569,7 @@
                     {\relax}%
                     {\AtBeginDocument{\addtocontents{toc}{\protect\vspace{-\cftbeforechapskip}}}}
             }
-    
+
     % another dirty work-around to get the spaced low small caps into the toc ;-(
         \ifthenelse{\boolean{@nochapters}}%
             {\relax}%
@@ -593,7 +593,7 @@
                     }%
                 \fi%
             }
-    
+
     % yet another dirty work-around to get the spaced low small caps into the toc ;-(
     \ifthenelse{\boolean{@parts}}%
     {%
@@ -623,7 +623,7 @@
            }%
         \fi%
      }{\relax}
-    
+
     \newcommand{\tocEntry}[1]{% for bib, etc.
         \ifpdf\texorpdfstring{\spacedlowsmallcaps{#1}}{#1}%
         \else{#1}\fi%
@@ -633,7 +633,7 @@
             \ifxetex\texorpdfstring{\spacedlowsmallcaps{#1}}{#1}%
             \else{#1}\fi%
         } \fi
-    
+
     % remove the vertical space between lof/lot entries of different chapters
         \ifthenelse{\boolean{@listsseparated}}{%
             \PackageWarningNoLine{classicthesis}{Option "listsseparated" deprecated as of version 2.9.}%
