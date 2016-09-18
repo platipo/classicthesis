@@ -100,14 +100,14 @@
 \PassOptionsToPackage{T1}{fontenc} % T2A for cyrillics
     \usepackage{fontenc}
 \usepackage{textcomp} % fix warning with missing font shapes
-\usepackage{fixltx2e} % fixes some LaTeX issues: http://tug.org/texmf-dist/doc/latex/base/fixltx2e.pdf
+\usepackage{latexrelease} % this package provides both forward and backward compatibility of the LATEX kernel
 \usepackage{scrhack} % fix warnings when using KOMA with listings package
 \usepackage{xspace} % to get the spacing after macros right
 \usepackage{mparhack} % get marginpar right
 \PassOptionsToPackage{printonlyused,smaller}{acronym}
     \usepackage{acronym} % nice macros for handling all acronyms in the thesis
 %\renewcommand*{\acsfont}[1]{\textssc{#1}} % for MinionPro
-\renewcommand{\bflabel}[1]{{#1}\hfill} % fix the list of acronyms
+%\renewcommand{\bflabel}[1]{{#1}\hfill} % fix the list of acronyms
 % ****************************************************************************************************
 
 
