@@ -113,16 +113,16 @@ the following:
     nifty packages that are used. In there, you can also activate
     backrefs in order to have information in the bibliography about
     where a source was cited in the text (\ie, the page number).
-    
+
     \emph{Make your changes and adjustments here.} This means that you
     specify here the options you want to load \texttt{classicthesis.sty}
     with. You also adjust the title of your thesis, your name, and all
     similar information here. Refer to \autoref{sec:custom} for more
     information.
-    
+
     This had to change as of version 3.0 in order to enable an easy
     transition from the ``basic'' style to \mLyX.
-    
+
 \end{itemize}
 In total, this should get you started in no time.
 
@@ -139,56 +139,56 @@ allow for a bit of freedom concerning the layout:
             each page, so you always know which version you are dealing with.
             Might come in handy not to give your Prof. that old draft.
         \end{itemize}
-    
+
     \item Parts and Chapters:
         \begin{itemize}
             \item\texttt{parts}: if you use Part divisions for your document,
             you should choose this option. (Cannot be used together with
             \texttt{nochapters}.)
-            
+
             \item\texttt{nochapters}: allows to use the look-and-feel with
             classes that do not use chapters, \eg, for articles. Automatically
             turns off a couple of other options: \texttt{eulerchapternumbers},
             \texttt{linedheaders}, \texttt{listsseparated}, and \texttt{parts}.
-            
+
             \item\texttt{linedheaders}: changes the look of the chapter
             headings a bit by adding a horizontal line above the chapter
             title. The chapter number will also be moved to the top of the
             page, above the chapter title.
-            
+
         \end{itemize}
-    
+
     \item Typography:
         \begin{itemize}
             \item\texttt{eulerchapternumbers}: use figures from Hermann Zapf's
             Euler math font for the chapter numbers. By default, old style
             figures from the Palatino font are used.
-            
+
             \item\texttt{beramono}: loads Bera Mono as typewriter font.
             (Default setting is using the standard CM typewriter font.)
             \item\texttt{eulermath}: loads the awesome Euler fonts for math.
             (Palatino is used as default font.)
-            
+
             \item\texttt{pdfspacing}: makes use of pdftex' letter spacing
             capabilities via the \texttt{microtype} package.\footnote{Use
             \texttt{microtype}'s \texttt{DVIoutput} option to generate
             DVI with pdftex.} This fixes some serious issues regarding
             math formul\ae\ etc. (\eg, ``\ss'') in headers.
-            
+
             \item\texttt{minionprospacing}: uses the internal \texttt{textssc}
             command of the \texttt{MinionPro} package for letter spacing. This
             automatically enables the \texttt{minionpro} option and overrides
             the \texttt{pdfspacing} option.
         \end{itemize}
-    
+
     \item Table of Contents:
         \begin{itemize}
             \item\texttt{tocaligned}: aligns the whole table of contents on
             the left side. Some people like that, some don't.
-            
+
             \item\texttt{dottedtoc}: sets pagenumbers flushed right in the
             table of contents.
-            
+
             \item\texttt{manychapters}: if you need more than nine chapters for
             your document, you might not be happy with the spacing between the
             chapter number and the chapter title in the Table of Contents.
@@ -196,25 +196,25 @@ allow for a bit of freedom concerning the layout:
             However, it does not look as ``perfect'' if you use
             \verb|\parts| for structuring your document.
         \end{itemize}
-    
+
     \item Floats:
         \begin{itemize}
         \item\texttt{listings}: loads the \texttt{listings} package (if not
         already done) and configures the List of Listings accordingly.
-        
+
         \item\texttt{floatperchapter}: activates numbering per chapter for
         all floats such as figures, tables, and listings (if used).
-        
+
         \item\texttt{subfig}(\texttt{ure}): is passed to the \texttt{tocloft}
         package to enable compatibility with the \texttt{subfig}(\texttt{ure})
         package. Use this option if you want use classicthesis with the
         \texttt{subfig} package.
-        
+
         % \item\texttt{listsseparated}: will add extra space between table
         % and figure entries of different chapters in the list of tables or
         % figures, respectively. % Deprecated as of version 2.9.
         \end{itemize}
-    
+
     % \item\texttt{a5paper}: adjusts the page layout according to the
     % global \texttt{a5paper} option (\emph{experimental} feature).
     % \item\texttt{minionpro}: sets Robert Slimbach's Minion as the
@@ -317,9 +317,9 @@ In the file \texttt{ClassicThesis.tex} activate the language:
     \selectlanguage{spanish}
 \end{verbatim}
 
-In order to get the bibliography style right, you can use the following:
+In order to get the bibliography, you can use the following:
 \begin{verbatim}
-    \bibliographystyle{babplain}
+  \printbibliography
 \end{verbatim}
 
 For this, it is necessary to load the package:
@@ -416,7 +416,3 @@ be found in the folder.
 %*****************************************
 %*****************************************
 %*****************************************
-
-
-
-
