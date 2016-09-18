@@ -88,8 +88,17 @@
 %\PassOptionsToPackage{spanish,es-lcroman}{babel}
     \usepackage{babel}
 
-\PassOptionsToPackage{square,numbers}{natbib}
-    \usepackage{natbib}
+\usepackage{csquotes}
+\PassOptionsToPackage{%
+    backend=biber, %instead of bibtex
+    %backend=bibtex8,bibencoding=ascii,%
+    language=auto,style=numeric-comp,%
+    %style=authoryear-comp, % Author 1999, 2010
+    sorting=nyt, % name, year, title
+    natbib=true % natbib compatibility mode (\citep and \citet still work)
+}{biblatex}
+    \usepackage{biblatex}
+
 
 \PassOptionsToPackage{fleqn}{amsmath} % math environments and more by the AMS
     \usepackage{amsmath}
