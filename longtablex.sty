@@ -1,0 +1,234 @@
+%%
+%% This is file `longtablex.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% longtablex.dtx  (with options: `package')
+%% ----------------------------------------------------------------
+%% longtablex --- A mix of tabularx and longtable
+%% E-mail: wybo@dekkerdocumenten.nl
+%% Released under the LaTeX Project Public License v1.3c or later
+%% See http://www.latex-project.org/lppl.txt
+%% ----------------------------------------------------------------
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{longtablex}[2011/11/16 v1.00 A mix of tabularx and longtable]
+\DeclareOption{infoshow}{\AtEndOfPackage\tracinglongtablex}
+\DeclareOption{debugshow}{\AtEndOfPackage\tracinglongtablex}
+\ProcessOptions
+\RequirePackage{array}[1994/02/03]
+\RequirePackage{longtable}[1994/12/08]
+\newdimen\LTX@col@width
+\newdimen\LTX@old@table
+\newdimen\LTX@old@col
+\newdimen\LTX@target
+\newdimen\LTX@delta
+\newcount\LTX@cols
+\newif\ifLTX@convertX@
+\LTX@convertX@true
+
+\newcommand\keepXColumns{
+  \LTX@convertX@false
+}
+
+\newcommand\convertXColumns{
+  \LTX@convertX@true
+}
+
+\newif\ifLTX@
+\def\longtablex#1{%
+\edef\LTX@{\@currenvir}%
+  {\ifnum0=`}\fi
+  \setlength\LTX@target{#1}%
+  \LTX@typeout{Target width: #1 = \the\LTX@target.}%
+  \toks@{}\LTX@get@body}
+
+\let\endlongtablex\relax
+\long\def\LTX@get@body#1\end
+  {\toks@\expandafter{\the\toks@#1}\LTX@find@end}
+\def\LTX@find@end#1{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\LTX@\expandafter\LTX@endlongtablex
+  \else\toks@\expandafter
+    {\the\toks@\end{#1}}\expandafter\LTX@get@body\fi}
+\def\LTX@{longtablex}
+\newcommand\LTX@endlongtablex{%
+  \expandafter\LTX@newcol\expandafter{\longtablexcolumn{\LTX@col@width}}%
+  \let\verb\LTX@verb
+  \def\@elt##1{\global\value{##1}\the\value{##1}\relax}%
+  \edef\LTX@ckpt{\cl@@ckpt}%
+  \let\@elt\relax
+  \LTX@old@table=\maxdimen
+  \LTX@col@width=\LTX@target
+  \global\LTX@cols=\@ne
+  \LTX@typeout@
+    {\@spaces Table Width\@spaces Column Width\@spaces X Columns}%
+  \let\savecaption\caption
+  \renewcommand{\caption}[2][]{\tabularnewline}
+  \let\saveendhead\endhead
+  \def\endhead{\\}
+  \let\saveendfirsthead\endfirsthead
+  \def\endfirsthead{\\}
+  \let\saveendfoot\endfoot
+  \def\endfoot{\\}
+  \let\saveendlastfoot\endlastfoot
+  \def\endlastfoot{\\}
+  \ifLTX@convertX@
+    \LTX@trial{\def\NC@rewrite@X{\NC@find l}}
+    \ifdim\wd\@tempboxa<\LTX@target
+      \LTX@newcol{l}
+    \else
+      \LTX@convertX@false
+    \fi
+  \fi
+
+  \ifLTX@convertX@
+    \relax
+  \else
+    \LTX@trial{\def\NC@rewrite@X{%
+        \global\advance\LTX@cols\@ne\NC@find p{\LTX@col@width}}}%
+    \loop
+      \LTX@arith
+      \ifLTX@
+      \LTX@trial{}%
+    \repeat
+  \fi
+  {\let\@footnotetext\LTX@ftntext\let\@xfootnotenext\LTX@xftntext
+    \LTchunksize\maxdimen
+    \let\caption\savecaption
+    \let\endhead\saveendhead
+    \let\endfirsthead\saveendfirsthead
+    \let\endfoot\saveendfoot
+    \let\endlastfoot\saveendlastfoot
+    %
+    \expandafter\longtable
+      \the\toks@
+    \endlongtable
+    }%
+  \global\LTX@ftn\expandafter{\expandafter}\the\LTX@ftn
+  \ifnum0=`{\fi}%
+   \end{longtablex}
+}
+\def\LTX@arith{%
+  \LTX@false
+  \ifdim\LTX@old@table=\wd\@tempboxa
+    \LTX@col@width\LTX@old@col
+    \LTX@typeout@{Reached minimum width, backing up.}%
+  \else
+    \dimen@\wd\@tempboxa
+    \advance\dimen@ -\LTX@target
+    \ifdim\dimen@<\LTX@delta
+      \LTX@typeout@{Reached target.}%
+    \else
+      \ifnum\LTX@cols>\@ne
+        \advance\LTX@cols\m@ne
+      \fi
+      \divide\dimen@\LTX@cols
+      \advance\dimen@ -\LTX@col@width
+      \ifdim \dimen@ >\z@
+        \PackageWarning{longtablex}%
+           {X Columns too narrow (table too wide)\MessageBreak}%
+        \LTX@col@width\LTX@error@width\relax
+      \else
+        \LTX@old@col\LTX@col@width
+        \LTX@old@table\wd\@tempboxa
+        \LTX@col@width-\dimen@
+        \LTX@true
+      \fi
+    \fi
+  \fi}
+\def\LTX@error@width{1em}
+\LTX@delta\hfuzz
+\newcolumntype{X}{}
+\def\longtablexcolumn#1{p{#1}}
+\def\LTX@newcol{\newcol@{X}[0]}
+\def\LTX@trial#1{%
+  \setbox\@tempboxa\hbox{%
+    #1\relax
+  \let\@footnotetext\LTX@trial@ftn
+  \let\LTX@vwarn\@empty
+   \expandafter\let\expandafter\longtablex\csname tabular*\endcsname
+   \expandafter\let\expandafter\endlongtablex\csname endtabular*\endcsname
+   \def\write{\begingroup
+     \def\let{\afterassignment\endgroup\toks@}%
+        \afterassignment\let\count@}%
+    \hbadness\@M
+    \hfuzz\maxdimen
+    \let\hbadness\@tempcnta
+    \let\hfuzz\@tempdima
+    \expandafter\tabular\the\toks@
+    \endtabular}%
+  \LTX@ckpt
+  \LTX@typeout@{\@spaces
+     \expandafter\LTX@align
+        \the\wd\@tempboxa\space\space\space\space\space\@@
+     \expandafter\LTX@align
+        \the\LTX@col@width\space\space\space\space\space\@@
+     \@spaces\the\LTX@cols}}
+\def\LTX@align#1.#2#3#4#5#6#7#8#9\@@{%
+  \ifnum#1<10 \space\fi
+  \ifnum#1<100 \space\fi
+  \ifnum#1<\@m\space\fi
+  \ifnum#1<\@M\space\fi
+  #1.#2#3#4#5#6#7#8\space\space}
+\def\arraybackslash{\let\\\@arraycr}
+\def\tracinglongtablex{%
+  \def\LTX@typeout{\PackageWarningNoLine{longtablex}}%
+  \def\LTX@typeout@##1{\typeout{(longtablex) ##1}}}
+\let\LTX@typeout\@gobble
+\let\LTX@typeout@\@gobble
+\newtoks\LTX@ftn
+\long\def\LTX@ftntext#1{%
+  \edef\@tempa{\the\LTX@ftn\noexpand\footnotetext
+                    [\the\csname c@\@mpfn\endcsname]}%
+  \global\LTX@ftn\expandafter{\@tempa{#1}}}%
+\long\def\LTX@xftntext[#1]#2{%
+  \global\LTX@ftn\expandafter{\the\LTX@ftn\footnotetext[#1]{#2}}}
+\long\def\LTX@trial@ftn#1{}
+{\uccode`\*=`\ %
+\uppercase{\gdef\LTX@verb{%
+  \leavevmode\null\LTX@vwarn
+  {\ifnum0=`}\fi\ttfamily\let\\\ignorespaces
+  \@ifstar{\let~*\LTX@vb}{\LTX@vb}}}}
+\def\LTX@vb#1{\def\@tempa##1#1{\toks@{##1}\edef\@tempa{\the\toks@}%
+    \expandafter\LTX@v\meaning\@tempa\\ \\\ifnum0=`{\fi}}\@tempa!}
+\def\LTX@v#1!{\afterassignment\LTX@vfirst\let\@tempa= }
+\begingroup
+\catcode`\*=\catcode`\#
+\catcode`\#=12
+\gdef\LTX@vfirst{%
+  \if\@tempa#%
+    \def\@tempb{\LTX@v@#}%
+  \else
+    \let\@tempb\LTX@v@
+    \if\@tempa\space~\else\@tempa\fi
+  \fi
+  \@tempb}
+\gdef\LTX@v@*1 *2{%
+  \LTX@v@hash*1##\relax\if*2\\\else~\expandafter\LTX@v@\fi*2}
+\gdef\LTX@v@hash*1##*2{*1\ifx*2\relax\else#\expandafter\LTX@v@hash\fi*2}
+\endgroup
+\def\LTX@vwarn{%
+  \@warning{\noexpand\verb may be unreliable inside longtablex}%
+  \global\let\LTX@vwarn\@empty}
+%%
+%% Copyright (C) 2009 by Wybo Dekker <wybo@dekkerdocumenten.nl>
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License (LPPL), either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in the file:
+%%
+%% http://www.latex-project.org/lppl.txt
+%%
+%% This work is "maintained" (as per LPPL maintenance status) by
+%% Wybo Dekker.
+%%
+%% This work consists of the file  longtablex.dtx
+%% and the derived files           longtablex.ins,
+%%                                 longtablex.pdf and
+%%                                 longtablex.sty.
+%%
+%%
+%% End of file `longtablex.sty'.
